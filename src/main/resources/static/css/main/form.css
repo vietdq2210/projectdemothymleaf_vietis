@@ -5,8 +5,8 @@
 }
 
 form fieldset {
-  border: 2px solid var(--secondary-border-color);
-  border-radius: var(--secondary-border-radius);
+  border: 1px solid black;
+  border-radius: 4px;
   padding: 0 12px 12px;
   position: relative;
 }

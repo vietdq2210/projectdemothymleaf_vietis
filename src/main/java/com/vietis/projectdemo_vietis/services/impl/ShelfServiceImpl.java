@@ -6,9 +6,7 @@ import com.vietis.projectdemo_vietis.services.ShelfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShelfServiceImpl implements ShelfService {
@@ -28,13 +26,13 @@ public class ShelfServiceImpl implements ShelfService {
 
     @Override
     public List<Shelf> search(Integer warehouseId) {
-        List<Shelf> shelf;
+        List<Shelf> shelfs;
         if(warehouseId==null){
-            shelf = shelfRepository.findAll();
+            shelfs = shelfRepository.findAll();
         }
         else{
-            shelf = shelfRepository.findById(warehouseId).stream().toList();
+            shelfs = shelfRepository.getShelfById(warehouseId);
         }
-        return shelf;
+        return shelfs;
     }
 }

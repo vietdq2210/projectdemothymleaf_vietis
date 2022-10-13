@@ -25,6 +25,22 @@ public class ShelfController {
 
     @GetMapping("")
     public String getShelfPage(Model model) {
+        Shelf shelf = new Shelf();
+        model.addAttribute("shelfWh", shelf);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Shelf> shelfList = shelfService.getListShelf();
+        model.addAttribute("listShelf",shelfList);
+        return "shelfForm";
+    }
+
+    @PostMapping("/save")
+    public String addShelf(Model model,@ModelAttribute("shelfWh") Shelf shelf,BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "403";
+        }
+        shelfService.addShelf(shelf);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse", warehouseList);
         List<Shelf> shelfList = shelfService.getListShelf();
@@ -33,26 +49,11 @@ public class ShelfController {
     }
 
     @GetMapping("/search")
-    public String getShelfById(@RequestParam(name = "id",required=false) Integer id , Model model){
+    public String getShelfById(Model model, @RequestParam(name = "id",required=false) Integer id ){
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse", warehouseList);
         List<Shelf> shelfList = shelfService.search(id);
         model.addAttribute("listShelf",shelfList);
         return "shelfForm";
-    }
-
-    @GetMapping("addShelf")
-    public String getAddShelfPage(Model model){
-        Shelf shelf = new Shelf();
-        model.addAttribute("shelfWh", shelf);
-        return "shelf";
-    }
-    @PostMapping("/save")
-    public String addShelf(@ModelAttribute("shelfWh") Shelf shelf,BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "error";
-        }
-        shelfService.addShelf(shelf);
-        return "shelf";
     }
 }

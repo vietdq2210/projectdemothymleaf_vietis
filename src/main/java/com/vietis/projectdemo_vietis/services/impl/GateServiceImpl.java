@@ -19,7 +19,19 @@ public class GateServiceImpl implements GateService {
     }
 
     @Override
-    public List<Gate> getListGate() {
+    public List<Gate> getListAllGate() {
         return gateRepository.findAll();
+    }
+
+    @Override
+    public List<Gate> search(Integer warehouseId) {
+        List<Gate> gates;
+        if(warehouseId==null){
+            gates = gateRepository.findAll();
+        }
+        else{
+            gates = gateRepository.getGateById(warehouseId);
+        }
+        return gates;
     }
 }

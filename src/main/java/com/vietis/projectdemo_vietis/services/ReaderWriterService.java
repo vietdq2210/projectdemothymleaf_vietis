@@ -10,4 +10,6 @@ public interface ReaderWriterService {
     List<ReaderWriter> getListReaderWriter();
 
     List<ReaderWriter> getByWarehouseId(int warehouseId);
+
+    List<ReaderWriter> search(Integer id);
 }

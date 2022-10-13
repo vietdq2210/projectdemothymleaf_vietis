@@ -1004,9 +1004,9 @@
 }
 
 .modal-content {
-  border-radius: var(--primary-border-radius);
-  background-color: var(--primary-background);
-  border: none;
+  border-radius: 10px;
+  background-color: floralwhite;
+  border: 1px solid;
 }
 
 .modal-content .btn-close {

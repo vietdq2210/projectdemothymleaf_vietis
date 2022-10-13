@@ -12,4 +12,5 @@ public class GateDTO {
     private String name;
     private String ipAddress;
     private Integer warehouseId;
+    private String warehouseName;
 }

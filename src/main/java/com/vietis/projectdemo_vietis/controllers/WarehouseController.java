@@ -6,40 +6,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("warehouse")
 public class WarehouseController {
     @Autowired
     private WarehouseServiceImpl warehouseService;
 
 
-    @GetMapping("/warehouse")
+    @GetMapping("")
     public String getWarehousePage(Model model) {
+        Warehouse warehouse = new Warehouse();
+        model.addAttribute("warehouse", warehouse);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
-        model.addAttribute("listWarehouse",warehouseList);
+        model.addAttribute("listWarehouse", warehouseList);
         return "warehouseForm";
     }
 
-    @GetMapping("/addWarehouse")
-    public String getAddWarehousePage() {
-        return "warehouse";
-    }
-    @PostMapping("/warehouse/save")
-    public String saveWarehouse(@RequestParam("wh_id") Integer id, @RequestParam("wh_name") String name,
-                                @RequestParam("address") String address, Warehouse warehouse, Model model, BindingResult bindingResult) {
+    @PostMapping("/save")
+    public String saveWarehouse(@ModelAttribute("warehouse") Warehouse warehouse, Model model, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "error";
+            return "403";
+        } else {
+            warehouseService.saveWarehouse(warehouse);
+            List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+            model.addAttribute("listWarehouse", warehouseList);
         }
-        warehouse.setId(id);
-        warehouse.setName(name);
-        warehouse.setAddress(address);
-        warehouseService.saveWarehouse(warehouse);
-        model.addAttribute("addWarehouse", "add thành công warehouse");
-        return "warehouse";
+        return "warehouseForm";
     }
 }

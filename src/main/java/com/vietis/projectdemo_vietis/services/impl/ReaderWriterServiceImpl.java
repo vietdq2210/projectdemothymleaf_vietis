@@ -28,4 +28,16 @@ public class ReaderWriterServiceImpl implements ReaderWriterService {
     public List<ReaderWriter> getByWarehouseId(int warehouseId) {
         return readerWriterRepository.findById(warehouseId).stream().toList();
     }
+
+    @Override
+    public List<ReaderWriter> search(Integer warehouseId) {
+        List<ReaderWriter> readerWriters;
+        if(warehouseId==null){
+            readerWriters = readerWriterRepository.findAll();
+        }
+        else{
+            readerWriters = readerWriterRepository.getReaderWriterById(warehouseId);
+        }
+        return readerWriters;
+    }
 }

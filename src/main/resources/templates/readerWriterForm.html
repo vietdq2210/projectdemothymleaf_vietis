@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form shelf</title>
+    <title>Form gate</title>
     <link rel="stylesheet" th:href="@{/css/home.css}"/>
 
     <link rel="stylesheet" th:href="@{/css/fontawesome.css}"/>
@@ -27,30 +27,30 @@
     <div class="row datatable">
         <div class="col-lg-12">
             <table id="order-history-table" class="table" cellspacing="0" width="100%">
-                <form id="searchShelfForm" th:action="@{/shelf/search}" method="post">
+                <form th:action="@{/readerWriter/search}">
                     <select name="id" class="form-select">
                         <option selected disabled hidden style='display: none' value="0"></option>
-                        <option th:each="warehouses : ${listWarehouse}"
-                                th:value="${warehouses.id}"
-                                th:text="${warehouses.name}"></option>
+                        <option th:each="warehouse : ${listWarehouse}"
+                                th:value="${warehouse.id}"
+                                th:text="${warehouse.name}"></option>
                     </select>
-                    <a href="javascript:void(0)" onclick="document.getElementById('searchShelfForm').submit();">
-                        <button type="button" class="btn btn-success">Search</button>
-                    </a>
+                    <button type="submit" class="btn btn-success">Search</button>
                 </form>
                 <thead>
                 <tr>
-                    <th class="text-center">ShelfID</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Stage</th>
+                    <th class="text-center">WarehouseID</th>
+                    <th class="text-center">ReaderWriterID</th>
+                    <th class="text-center">Address</th>
+                    <th class="text-center">IP Address</th>
                     <th class="text-center">CRUD</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="shelf : ${listShelf}">
-                    <td class="text-center" th:text="*{shelf.id}"></td>
-                    <td class="text-center" th:text="*{shelf.name}"></td>
-                    <td class="text-center" th:text="*{shelf.stageNumber}"></td>
+                <tr th:each="readerWriter : ${listReaderWriter}">
+                    <td class="text-center" th:text="*{readerWriter.warehouseId}"></td>
+                    <td class="text-center" th:text="*{readerWriter.id}"></td>
+                    <td class="text-center" th:text="*{readerWriter.address}"></td>
+                    <td class="text-center" th:text="*{readerWriter.ipAddress}"></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-warning">Edit</button>
                         <button type="button" class="btn btn-danger">Delete</button>
@@ -60,19 +60,13 @@
             </table>
         </div>
     </div>
-    <div class="col-12 mb-3">
-        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addShelfModal">
-            <button type="button" class="btn btn-success">Add</button>
-        </a>
-    </div>
+    <a th:href="@{/gate/addGate}">
+        <button type="button" class="btn btn-success">Add</button>
+    </a>
 </div>
 <div th:replace="common/footer :: footer"></div>
-<th:block>
-    <div th:replace="modal/addShelfModal :: addShelfModal(listWarehouse=${listWarehouse})"></div>
-</th:block>
-<script th:src="@{/js/all.js}"></script>
-<script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/datatable/jquery.min.js}"></script>
+<!--<script th:src="@{/js/datatable/jquery.dataTables.min.js}"></script>-->
 <script th:src="@{/js/datatable/datatables.vietnamese.js}"></script>
 </body>
 </html>

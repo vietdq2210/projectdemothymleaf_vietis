@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,11 +23,20 @@ public class ReaderWriterController {
 
     @GetMapping("")
     public String getReaderWriterPage(Model model){
-        ReaderWriter readerWriter = new ReaderWriter();
-        model.addAttribute("readerWriterWh", readerWriter);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
-        model.addAttribute("warehouse",warehouseList);
-        return "reader_writer";
+        model.addAttribute("listWarehouse",warehouseList);
+        List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
+        model.addAttribute("listReaderWriter",readerWriterList);
+        return "readerWriterForm";
+    }
+
+    @GetMapping("/search")
+    public String getReaderWriterById(@RequestParam(name = "id",required=false) Integer id , Model model){
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<ReaderWriter> readerWriterList = readerWriterService.search(id);
+        model.addAttribute("listReaderWriter",readerWriterList);
+        return "readerWriterForm";
     }
 
     @PostMapping("/save")
@@ -39,6 +45,6 @@ public class ReaderWriterController {
             return "error";
         }
         readerWriterService.saveReaderWriter(readerWriter);
-        return "reader_writer";
+        return "readerWriter";
     }
 }

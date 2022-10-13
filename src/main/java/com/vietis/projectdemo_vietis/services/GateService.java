@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface GateService {
     Gate addGate(Gate gate);
-    List<Gate> getListGate();
+    List<Gate> getListAllGate();
+
+    List<Gate> search(Integer id);
 }
