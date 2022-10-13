@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Antenna</title>
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+<div th:replace="common/navbar :: navbar"></div>
+<form action="#" th:action="@{/antenna/save}" th:object="${antennaWh}" method="post">
+    <table>
+        <tr>
+            <td>Warehouse:</td>
+            <td>
+                <select th:field="*{warehouseId}">
+                    <option value="">Select warehouse</option>
+                    <option th:each="warehouse : ${listWarehouse}"
+                            th:value="${warehouse.id}"
+                            th:text="${warehouse.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Reader/Writer:</td>
+            <td>
+                <select th:field="*{readerWriterId}">
+                    <option value="0">Select Reader/Writer</option>
+                    <option th:each="readerWriter : ${listReaderWriter}"
+                            th:value="${readerWriter.id}"
+                            th:text="${readerWriter.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Antenna ID:</td>
+            <td><input type="text" th:field="*{id}"></td>
+        </tr>
+        <tr>
+            <td>Port no:</td>
+            <td><input type="text" th:field="*{portNo}"></td>
+        </tr>
+        <tr>
+            <td>Shelf ID:</td>
+            <td><input type="text" th:field="*{shelfId}"></td>
+        </tr>
+        <tr>
+            <td>Stage number</td>
+            <td><input type="text" th:field="*{stageNumber}"></td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="Save"/></td>
+        </tr>
+    </table>
+</form>
+<div th:replace="common/footer :: footer"></div>
+</body>
+</html>

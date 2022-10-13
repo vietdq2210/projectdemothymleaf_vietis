@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Hello</title>
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+<h1>Chỉ những ai đăng nhập mới truy cập được trang này!</h1>
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+</div>
+<div sec:authorize="hasAnyRole('ADMIN')">
+    This content is only shown to administrators.
+</div>
+<div sec:authorize="hasAnyRole('USER')">
+    This content is only shown to users.
+</div>
+Authenticated username: <span ></span><br/>
+Authenticated user roles: <span sec:authentication="principal.authorities"></span>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div class="topnav" th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <a class="active" th:href="@{/home}">Home</a>
+    <a class="target" th:href="@{/warehouse}">Warehouses</a>
+    <a class="target" th:href="@{/shelf}">Shelf</a>
+    <a class="target" th:href="@{/gate}">Gate</a>
+    <a class="target" th:href="@{/readerWriter}">Reader/Writer</a>
+    <a class="target" th:href="@{/antenna}">Antenna</a>
+    <span sec:authentication="principal.username"></span>
+    <span sec:authentication="principal.authorities"></span>
+    <<a class="target" th:href="@{/logout}">Đăng xuất</a>
+</div>

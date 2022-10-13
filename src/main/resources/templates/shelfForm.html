@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form shelf</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/fontawesome.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/datatable/table.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/main/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main/common.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main/grid.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main/form.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main/food.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main/cart.css}"/>
+</head>
+<body>
+<div th:replace="common/navbar :: navbar"></div>
+<div class="panel m-mt-20">
+    <div class="row datatable">
+        <div class="col-lg-12">
+            <table id="order-history-table" class="table" cellspacing="0" width="100%">
+                <form th:action="@{/shelf/search}">
+                    <select name="id" class="form-select">
+                        <option selected disabled hidden style='display: none' value="0"></option>
+                        <option th:each="warehouses : ${listWarehouse}"
+                                th:value="${warehouses.id}"
+                                th:text="${warehouses.name}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+                <thead>
+                <tr>
+                    <th class="text-center">ShelfID</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Stage</th>
+                    <th class="text-center">CRUD</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="shelf : ${listShelf}">
+                    <td class="text-center" th:text="*{shelf.id}"></td>
+                    <td class="text-center" th:text="*{shelf.name}"></td>
+                    <td class="text-center" th:text="*{shelf.stageNumber}"></td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a th:href="@{/shelf/addShelf}">
+        <button type="button" class="btn btn-success">Add</button>
+    </a>
+</div>
+<div th:replace="common/footer :: footer"></div>
+<script th:src="@{/js/datatable/jquery.min.js}"></script>
+<!--<script th:src="@{/js/datatable/jquery.dataTables.min.js}"></script>-->
+<script th:src="@{/js/datatable/datatables.vietnamese.js}"></script>
+</body>
+</html>

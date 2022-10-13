@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land - 403</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/fontawesome.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/error.css}"/>
+  <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+<div th:replace="common/navbar :: navbar"></div>
+<div id="intro">
+  <div class="middle error">
+    <div class="error-panel">
+      <div class="text-center">
+        <div class="mb-4">
+          <p class="statu-404">403</p>
+        </div>
+        <h4>Bạn không thể truy cập đường dẫn này!</h4>
+        <a th:href="@{/home}" class="btn btn-back">Trang chủ</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="common/footer :: footer"></div>
+</body>
+</html>
