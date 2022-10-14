@@ -23,6 +23,8 @@ public class ReaderWriterController {
 
     @GetMapping("")
     public String getReaderWriterPage(Model model){
+        ReaderWriter readerWriter = new ReaderWriter();
+        model.addAttribute("readerWriterWh",readerWriter);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse",warehouseList);
         List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
@@ -30,8 +32,10 @@ public class ReaderWriterController {
         return "readerWriterForm";
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String getReaderWriterById(@RequestParam(name = "id",required=false) Integer id , Model model){
+        ReaderWriter readerWriter = new ReaderWriter();
+        model.addAttribute("readerWriterWh",readerWriter);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse", warehouseList);
         List<ReaderWriter> readerWriterList = readerWriterService.search(id);
@@ -40,11 +44,16 @@ public class ReaderWriterController {
     }
 
     @PostMapping("/save")
-    public String addReaderWriter(@ModelAttribute("readerWriterWh") ReaderWriter readerWriter, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "error";
+    public String addReaderWriter(Model model,@ModelAttribute("readerWriterWh") ReaderWriter readerWriter, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "403";
         }
         readerWriterService.saveReaderWriter(readerWriter);
-        return "readerWriter";
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
+        model.addAttribute("listReaderWriter",readerWriterList);
+        return "readerWriterForm";
     }
 }

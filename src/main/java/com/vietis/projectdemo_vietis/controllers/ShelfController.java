@@ -34,6 +34,17 @@ public class ShelfController {
         return "shelfForm";
     }
 
+    @PostMapping("/search")
+    public String getShelfById(Model model, @RequestParam(name = "id",required=false) Integer id ){
+        Shelf shelf = new Shelf();
+        model.addAttribute("shelfWh", shelf);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Shelf> shelfList = shelfService.search(id);
+        model.addAttribute("listShelf",shelfList);
+        return "shelfForm";
+    }
+
     @PostMapping("/save")
     public String addShelf(Model model,@ModelAttribute("shelfWh") Shelf shelf,BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -44,15 +55,6 @@ public class ShelfController {
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse", warehouseList);
         List<Shelf> shelfList = shelfService.getListShelf();
-        model.addAttribute("listShelf",shelfList);
-        return "shelfForm";
-    }
-
-    @GetMapping("/search")
-    public String getShelfById(Model model, @RequestParam(name = "id",required=false) Integer id ){
-        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
-        model.addAttribute("listWarehouse", warehouseList);
-        List<Shelf> shelfList = shelfService.search(id);
         model.addAttribute("listShelf",shelfList);
         return "shelfForm";
     }

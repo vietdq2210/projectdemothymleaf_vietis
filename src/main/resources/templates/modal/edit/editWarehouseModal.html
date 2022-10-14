@@ -1,0 +1,43 @@
+<div class="modal fade" id="addWarehouseModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true" th:fragment="addWarehouseModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Add Warehouse</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="addNewWarehouseForm" class="row" th:action="@{/warehouse/save}" method="post" enctype="multipart/form-data" th:object="${warehouse}">
+                            <div class="form-group col-md-12">
+                                <fieldset>
+                                    <legend>WarehouseID</legend>
+                                    <input type="text" name="warehouseID" class="form-control custom-file-input" th:field="*{id}">
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <fieldset>
+                                    <legend>Warehouse Name</legend>
+                                    <input type="text" class="form-control" name="warehouseName" th:field="*{name}">
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <fieldset>
+                                    <legend>Address</legend>
+                                    <input type="text" class="form-control pe-5" name="address" th:field="*{address}">
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" onclick="document.getElementById('addNewWarehouseForm').submit();">
+                    <button type="button" class="btn btn-success">Add</button>
+                </a>
+                <a href="javascript:void(0)" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger">Close</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

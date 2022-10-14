@@ -1,0 +1,60 @@
+<div class="modal fade" id="addReaderWriterModal" tabindex="-1" aria-labelledby="addReaderWriterModalLabel" aria-hidden="true"
+     th:fragment="addReaderWriterModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReaderWriterModalLabel">Add Reader/Writer</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <form id="addNewReaderWriterForm" class="row" th:action="@{/readerWriter/save}" method="post"
+                  enctype="multipart/form-data" th:object="${readerWriterWh}">
+              <div class="form-group col-md-12 mb-0">
+                <fieldset class="bg-dark-ui">
+                  <legend>WarehouseID</legend>
+                  <select class="form-control form-select" th:field="*{warehouseId}"
+                          name="warehouseId">
+                    <option value="">Select warehouse</option>
+                    <option th:each="warehouses : ${listWarehouse}"
+                            th:value="${warehouses.id}"
+                            th:text="${warehouses.name}"></option>
+                  </select>
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>Reader/Writer ID:</legend>
+                  <input type="text" class="form-control custom-file-input" th:field="*{id}"
+                         name="readerWriterId">
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>IP Address:</legend>
+                  <input type="text" class="form-control" th:field="*{ipAddress}" name="ipAddress">
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>Address:</legend>
+                  <input type="text" class="form-control pe-5" th:field="*{address}"
+                         name="address">
+                </fieldset>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" onclick="document.getElementById('addNewReaderWriterForm').submit();">
+          <button type="button" class="btn btn-success">Add</button>
+        </a>
+        <a href="javascript:void(0)" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-danger">Close</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

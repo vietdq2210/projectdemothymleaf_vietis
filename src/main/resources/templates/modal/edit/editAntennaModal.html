@@ -1,0 +1,79 @@
+<div class="modal fade" th:id="editAntennaModal" tabindex="-1" aria-labelledby="editAntennaModalLabel" aria-hidden="true"
+     th:fragment="editAntennaModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAntennaModalLabel">Edit Antenna</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <form id="editNewAntennaForm" class="row" th:action="@{'/antenna/update/' + ${antennaWh.id}}" method="post"
+                  enctype="multipart/form-data" th:object="${antennaWh}">
+              <div class="form-group col-md-12 mb-0">
+                <fieldset class="bg-dark-ui">
+                  <legend>WarehouseID</legend>
+                  <select class="form-control form-select" th:field="*{warehouseId}"
+                          name="warehouseId" >
+                    <option value="" th:text="*{antennaById.warehouseId}"></option>
+                    <option th:each="warehouses : ${listWarehouse}"
+                            th:value="${warehouses.id}"
+                            th:text="${warehouses.name}"></option>
+                  </select>
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12 mb-0">
+                <fieldset class="bg-dark-ui">
+                  <legend>Reader/WriterID</legend>
+                  <select class="form-control form-select" th:field="*{readerWriterId}"
+                          name="readerWriterId">
+                    <option value=""></option>
+                    <option th:each="readerWriter : ${listReaderWriter}"
+                            th:value="${readerWriter.id}"
+                            th:text="${readerWriter.address}"></option>
+                  </select>
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>Antenna ID:</legend>
+                  <input type="text" class="form-control custom-file-input" th:field="*{id}"
+                         name="antennaId">
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>Port No:</legend>
+                  <input type="text" class="form-control" th:field="*{portNo}"
+                         name="portNo">
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>Shelf ID:</legend>
+                  <input type="text" class="form-control pe-5" th:field="*{shelfId}"
+                         name="shelfId">
+                </fieldset>
+              </div>
+              <div class="form-group col-md-12">
+                <fieldset>
+                  <legend>Stage Number:</legend>
+                  <input type="text" class="form-control pe-5" th:field="*{stageNumber}"
+                         name="stageNumber">
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" onclick="document.getElementById('editNewAntennaForm').submit();">
+          <button type="button" class="btn btn-success">Edit</button>
+        </a>
+        <a href="javascript:void(0)" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-danger">Close</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

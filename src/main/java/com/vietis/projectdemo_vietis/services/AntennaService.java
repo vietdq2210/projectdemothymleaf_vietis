@@ -9,4 +9,6 @@ public interface AntennaService {
     List<Antenna> findAll();
 
     List<Antenna> search(Integer id);
+
+    Antenna getById(Integer id);
 }

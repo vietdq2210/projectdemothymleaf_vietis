@@ -27,7 +27,7 @@
     <div class="row datatable">
         <div class="col-lg-12">
             <table id="order-history-table" class="table" cellspacing="0" width="100%">
-                <form th:action="@{/gate/search}">
+                <form th:action="@{/gate/search}" method="post">
                     <select name="id" class="form-select">
                         <option selected disabled hidden style='display: none' value="0"></option>
                         <option th:each="warehouse : ${listWarehouse}"
@@ -62,13 +62,17 @@
             </table>
         </div>
     </div>
-    <a th:href="@{/gate/addGate}">
-        <button type="button" class="btn btn-success">Add</button>
-    </a>
+    <div class="col-12 mb-3">
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addGateModal">
+            <button type="button" class="btn btn-success">Add</button>
+        </a>
+    </div>
 </div>
 <div th:replace="common/footer :: footer"></div>
+<div th:replace="modal/add/addGateModal :: addGateModal(listWarehouse=${listWarehouse})"></div>
+<script th:src="@{/js/all.js}"></script>
+<script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/datatable/jquery.min.js}"></script>
-<!--<script th:src="@{/js/datatable/jquery.dataTables.min.js}"></script>-->
 <script th:src="@{/js/datatable/datatables.vietnamese.js}"></script>
 </body>
 </html>

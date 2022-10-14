@@ -67,9 +67,7 @@
     </div>
 </div>
 <div th:replace="common/footer :: footer"></div>
-<th:block>
-    <div th:replace="modal/addShelfModal :: addShelfModal(listWarehouse=${listWarehouse})"></div>
-</th:block>
+<div th:replace="modal/add/addShelfModal :: addShelfModal(listWarehouse=${listWarehouse})"></div>
 <script th:src="@{/js/all.js}"></script>
 <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/datatable/jquery.min.js}"></script>

@@ -4,6 +4,7 @@ import com.vietis.projectdemo_vietis.models.entities.Antenna;
 import com.vietis.projectdemo_vietis.repositories.AntennaRepository;
 import com.vietis.projectdemo_vietis.services.AntennaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,11 @@ public class AntennaServiceImpl implements AntennaService {
             antennas = antennaRepository.getAntennaById(id);
         }
         return antennas;
+    }
+
+    @Override
+    public Antenna getById(Integer id) {
+        return antennaRepository.findById(id).get();
     }
 
 

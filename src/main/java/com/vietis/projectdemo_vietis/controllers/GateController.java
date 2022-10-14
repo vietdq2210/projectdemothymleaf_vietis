@@ -25,6 +25,8 @@ public class GateController {
 
     @GetMapping("")
     public String getGatePage(Model model){
+        Gate gate = new Gate();
+        model.addAttribute("gateWh",gate);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse",warehouseList);
         List<Gate> gateList = gateService.getListAllGate();
@@ -32,8 +34,10 @@ public class GateController {
         return "gateForm";
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String getGateById(@RequestParam(name = "id",required=false) Integer id , Model model){
+        Gate gate = new Gate();
+        model.addAttribute("gateWh",gate);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse", warehouseList);
         List<Gate> gateList = gateService.search(id);
@@ -41,19 +45,17 @@ public class GateController {
         return "gateForm";
     }
 
-    @GetMapping("/addGate")
-    public String getAddShelfPage(Model model){
-        Gate gate = new Gate();
-        model.addAttribute("gateWh",gate);
-        return "gate";
-    }
-
     @PostMapping("/save")
-    public String addGate(@ModelAttribute("gateWh") Gate gate, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "error";
+    public String addGate(Model model,@ModelAttribute("gateWh") Gate gate,BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "403";
         }
         gateService.addGate(gate);
-        return "gate";
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Gate> gateList = gateService.getListAllGate();
+        model.addAttribute("listGate",gateList);
+        return "gateForm";
     }
 }

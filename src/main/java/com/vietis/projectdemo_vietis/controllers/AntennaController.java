@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -33,26 +34,64 @@ public class AntennaController {
     @GetMapping("")
 //    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getAntennaPage(Model model){
-        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
-        model.addAttribute("listWarehouse",warehouseList);
-        List<Antenna> antennaList = antennaService.findAll();
-        model.addAttribute("listAntenna",antennaList);
-        return "antennaForm";
-    }
-
-    @GetMapping("/search")
-    public String getAntennaById(@RequestParam(name = "id",required=false) Integer id , Model model){
-        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
-        model.addAttribute("listWarehouse", warehouseList);
-        List<Antenna> antennaList = antennaService.search(id);
-        model.addAttribute("listAntenna",antennaList);
-        return "antennaForm";
-    }
-
-    @GetMapping("/addAntenna")
-    public String getAddAntennaPage(Model model){
         Antenna antenna = new Antenna();
         model.addAttribute("antennaWh",antenna);
-        return "antenna";
+        getData(model);
+        List<Antenna> antennaList = antennaService.findAll();
+        model.addAttribute("listAntenna",antennaList);
+        model.addAttribute("check",0);
+        return "antennaForm";
+    }
+
+    @PostMapping("/search")
+    public String getAntennaById(Model model,@RequestParam(name = "id",required=false) Integer id ){
+        Antenna antenna = new Antenna();
+        model.addAttribute("antennaWh",antenna);
+        getData(model);
+        List<Antenna> antennaList = antennaService.search(id);
+        model.addAttribute("listAntenna",antennaList);
+        model.addAttribute("check",0);
+        return "antennaForm";
+    }
+
+    @PostMapping("/save")
+    public String addAntenna(Model model, @ModelAttribute("antennaWh") Antenna antenna, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "403";
+        }
+        antennaService.saveAntenna(antenna);
+        getData(model);
+        List<Antenna> antennaList = antennaService.findAll();
+        model.addAttribute("listAntenna",antennaList);
+        model.addAttribute("check",1);
+        return "antennaForm";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getEditAntennaModal(Model model, @PathVariable Integer id){
+        model.addAttribute("antennaById",antennaService.getById(id));
+        getData(model);
+        List<Antenna> antennaList = antennaService.findAll();
+        model.addAttribute("listAntenna",antennaList);
+        model.addAttribute("check",2);
+        return "antennaForm";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateAntenna(Model model, @ModelAttribute("antennaWh") Antenna antenna) {
+        antennaService.saveAntenna(antenna);
+        getData(model);
+        List<Antenna> antennaList = antennaService.findAll();
+        model.addAttribute("listAntenna",antennaList);
+        model.addAttribute("check",2);
+        return "antennaForm";
+    }
+
+    public void getData(Model model){
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse",warehouseList);
+        List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
+        model.addAttribute("listReaderWriter",readerWriterList);
     }
 }
