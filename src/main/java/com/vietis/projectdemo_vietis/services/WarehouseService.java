@@ -10,4 +10,5 @@ public interface WarehouseService {
     Warehouse saveWarehouse(Warehouse warehouse);
 
     List<Warehouse> getListWarehouse();
+    void deleteById(Integer id);
 }

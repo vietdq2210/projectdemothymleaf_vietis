@@ -9,4 +9,5 @@ public interface GateService {
     List<Gate> getListAllGate();
 
     List<Gate> search(Integer id);
+    void deleteById(Integer id);
 }

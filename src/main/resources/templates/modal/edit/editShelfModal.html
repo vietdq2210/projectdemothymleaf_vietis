@@ -1,14 +1,14 @@
-<div class="modal fade" id="addShelfModal" tabindex="-1" aria-labelledby="addShelfModalLabel" aria-hidden="true"
-     th:fragment="addShelfModal">
+<div class="modal fade" id="editShelfModal" tabindex="-1" aria-labelledby="editShelfModalLabel" aria-hidden="true"
+     th:fragment="editShelfModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addShelfModalLabel">Add Shelf</h5>
+                <h5 class="modal-title" id="editShelfModalLabel">Edit Shelf</h5>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <form id="addNewShelfForm" class="row" th:action="@{/shelf/save}" method="post"
+                        <form id="editNewShelfForm" class="row" th:action="@{'/shelf/update/' + ${shelfWh.id}}" method="post"
                               enctype="multipart/form-data" th:object="${shelfWh}">
                             <div class="form-group col-md-12 mb-0">
                                 <fieldset class="bg-dark-ui">
@@ -48,8 +48,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="javascript:void(0)" onclick="document.getElementById('addNewShelfForm').submit();">
-                    <button type="button" class="btn btn-success">Add</button>
+                <a href="javascript:void(0)" onclick="document.getElementById('editNewShelfForm').submit();">
+                    <button type="button" class="btn btn-success">Edit</button>
                 </a>
                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                     <button type="button" class="btn btn-danger">Close</button>

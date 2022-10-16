@@ -34,4 +34,9 @@ public class GateServiceImpl implements GateService {
         }
         return gates;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        gateRepository.deleteById(id);
+    }
 }

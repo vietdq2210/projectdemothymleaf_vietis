@@ -12,4 +12,5 @@ public interface ReaderWriterService {
     List<ReaderWriter> getByWarehouseId(int warehouseId);
 
     List<ReaderWriter> search(Integer id);
+    void deleteById(Integer id);
 }

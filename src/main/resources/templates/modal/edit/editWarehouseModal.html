@@ -1,13 +1,14 @@
-<div class="modal fade" id="addWarehouseModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true" th:fragment="addWarehouseModal">
+<div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel" aria-hidden="true" th:fragment="editWarehouseModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addWarehouseModalLabel">Add Warehouse</h5>
+                <h5 class="modal-title" id="editWarehouseModalLabel">Edit Warehouse</h5>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <form id="addNewWarehouseForm" class="row" th:action="@{/warehouse/save}" method="post" enctype="multipart/form-data" th:object="${warehouse}">
+                        <form id="editNewWarehouseForm" class="row" th:action="@{'/warehouse/update/' + ${warehouse.id}}" method="post"
+                              enctype="multipart/form-data" th:object="${warehouse}">
                             <div class="form-group col-md-12">
                                 <fieldset>
                                     <legend>WarehouseID</legend>
@@ -31,8 +32,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="javascript:void(0)" onclick="document.getElementById('addNewWarehouseForm').submit();">
-                    <button type="button" class="btn btn-success">Add</button>
+                <a href="javascript:void(0)" onclick="document.getElementById('editNewWarehouseForm').submit();">
+                    <button type="button" class="btn btn-success">Edit</button>
                 </a>
                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                     <button type="button" class="btn btn-danger">Close</button>

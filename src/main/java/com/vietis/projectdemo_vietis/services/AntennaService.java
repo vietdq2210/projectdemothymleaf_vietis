@@ -11,4 +11,6 @@ public interface AntennaService {
     List<Antenna> search(Integer id);
 
     Antenna getById(Integer id);
+
+    void deleteById(Integer id);
 }

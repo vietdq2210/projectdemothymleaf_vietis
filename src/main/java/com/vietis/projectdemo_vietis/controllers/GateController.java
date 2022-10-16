@@ -1,5 +1,6 @@
 package com.vietis.projectdemo_vietis.controllers;
 
+import com.vietis.projectdemo_vietis.models.entities.Antenna;
 import com.vietis.projectdemo_vietis.models.entities.Gate;
 import com.vietis.projectdemo_vietis.models.entities.Shelf;
 import com.vietis.projectdemo_vietis.models.entities.Warehouse;
@@ -57,5 +58,32 @@ public class GateController {
         List<Gate> gateList = gateService.getListAllGate();
         model.addAttribute("listGate",gateList);
         return "gateForm";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getEditGateModal(Model model, @PathVariable Integer id){
+        Gate gate = new Gate();
+        model.addAttribute("gateWh",gate);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Gate> gateList = gateService.getListAllGate();
+        model.addAttribute("listGate",gateList);
+        return "gateForm";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateAntenna(Model model, @ModelAttribute("gateWh") Gate gate) {
+        gateService.addGate(gate);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Gate> gateList = gateService.getListAllGate();
+        model.addAttribute("listGate",gateList);
+        return "gateForm";
+    }
+
+    @GetMapping("/delete")
+    public String deleteGate(Model model,@RequestParam(name = "gateId",required=true) Integer id){
+        gateService.deleteById(id);
+        return "redirect:" + "/gate";
     }
 }

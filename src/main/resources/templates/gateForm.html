@@ -54,8 +54,12 @@
                     <td class="text-center" th:text="*{gate.name}"></td>
                     <td class="text-center" th:text="*{gate.ipAddress}"></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="javascript:void(0)" data-bs-toggle="modal"  data-bs-target="#editGateModal" >
+                            <button type="button" class="btn btn-warning" th:href="@{'/gate/update/' +${gate.id}}">Edit</button>
+                        </a>
+                        <a th:href="@{/gate/delete(gateId=${gate.id})}"
+                        <button type="submit" class="btn btn-success">Delete</button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -70,6 +74,7 @@
 </div>
 <div th:replace="common/footer :: footer"></div>
 <div th:replace="modal/add/addGateModal :: addGateModal(listWarehouse=${listWarehouse})"></div>
+<div th:replace="modal/edit/editGateModal :: editGateModal(listWarehouse=${listWarehouse})"></div>
 <script th:src="@{/js/all.js}"></script>
 <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/datatable/jquery.min.js}"></script>

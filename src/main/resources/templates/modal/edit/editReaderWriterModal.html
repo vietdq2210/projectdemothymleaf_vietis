@@ -1,14 +1,14 @@
-<div class="modal fade" id="addReaderWriterModal" tabindex="-1" aria-labelledby="addReaderWriterModalLabel" aria-hidden="true"
-     th:fragment="addReaderWriterModal">
+<div class="modal fade" id="editReaderWriterModal" tabindex="-1" aria-labelledby="editReaderWriterModalLabel" aria-hidden="true"
+     th:fragment="editReaderWriterModal">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addReaderWriterModalLabel">Add Reader/Writer</h5>
+        <h5 class="modal-title" id="editReaderWriterModalLabel">Edit Reader/Writer</h5>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-12">
-            <form id="addNewReaderWriterForm" class="row" th:action="@{/readerWriter/save}" method="post"
+            <form id="editNewReaderWriterForm" class="row" th:action="@{'/readerWriter/update/' + ${readerWriterWh.id}}" method="post"
                   enctype="multipart/form-data" th:object="${readerWriterWh}">
               <div class="form-group col-md-12 mb-0">
                 <fieldset class="bg-dark-ui">
@@ -48,8 +48,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="javascript:void(0)" onclick="document.getElementById('addNewReaderWriterForm').submit();">
-          <button type="button" class="btn btn-success">Add</button>
+        <a href="javascript:void(0)" onclick="document.getElementById('editNewReaderWriterForm').submit();">
+          <button type="button" class="btn btn-success">Edit</button>
         </a>
         <a href="javascript:void(0)" data-bs-dismiss="modal">
           <button type="button" class="btn btn-danger">Close</button>

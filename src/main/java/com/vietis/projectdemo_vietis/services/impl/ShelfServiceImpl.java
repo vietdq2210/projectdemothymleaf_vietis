@@ -35,4 +35,9 @@ public class ShelfServiceImpl implements ShelfService {
         }
         return shelfs;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        shelfRepository.deleteById(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.vietis.projectdemo_vietis.controllers;
 
+import com.vietis.projectdemo_vietis.models.entities.Shelf;
 import com.vietis.projectdemo_vietis.models.entities.Warehouse;
 import com.vietis.projectdemo_vietis.services.impl.WarehouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,28 @@ public class WarehouseController {
             model.addAttribute("listWarehouse", warehouseList);
         }
         return "warehouseForm";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getEditWarehouseModal(Model model, @PathVariable Integer id){
+        Warehouse warehouse = new Warehouse();
+        model.addAttribute("warehouse", warehouse);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        return "warehouseForm";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateWarehouse(Model model, @ModelAttribute("warehouse") Warehouse warehouse) {
+        warehouseService.saveWarehouse(warehouse);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        return "warehouseForm";
+    }
+
+    @GetMapping("/delete")
+    public String deleteGate(Model model,@RequestParam(name = "warehouseId",required=true) Integer id){
+        warehouseService.deleteById(id);
+        return "redirect:" + "/warehouse";
     }
 }

@@ -50,7 +50,6 @@ public class AntennaController {
         getData(model);
         List<Antenna> antennaList = antennaService.search(id);
         model.addAttribute("listAntenna",antennaList);
-        model.addAttribute("check",0);
         return "antennaForm";
     }
 
@@ -64,17 +63,14 @@ public class AntennaController {
         getData(model);
         List<Antenna> antennaList = antennaService.findAll();
         model.addAttribute("listAntenna",antennaList);
-        model.addAttribute("check",1);
         return "antennaForm";
     }
 
     @GetMapping("/update/{id}")
     public String getEditAntennaModal(Model model, @PathVariable Integer id){
-        model.addAttribute("antennaById",antennaService.getById(id));
         getData(model);
         List<Antenna> antennaList = antennaService.findAll();
         model.addAttribute("listAntenna",antennaList);
-        model.addAttribute("check",2);
         return "antennaForm";
     }
 
@@ -84,8 +80,14 @@ public class AntennaController {
         getData(model);
         List<Antenna> antennaList = antennaService.findAll();
         model.addAttribute("listAntenna",antennaList);
-        model.addAttribute("check",2);
         return "antennaForm";
+    }
+
+    @GetMapping("/delete")
+    public String deleteAntenna(Model model,@RequestParam(name = "antennaId",required=true) Integer id){
+        antennaService.deleteById(id);
+        getData(model);
+        return "redirect:" + "/antenna";
     }
 
     public void getData(Model model){

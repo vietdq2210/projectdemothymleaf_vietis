@@ -11,4 +11,5 @@ public interface ShelfService {
     List<Shelf> getListShelf();
 
     List<Shelf> search(Integer id);
+    void deleteById(Integer id);
 }

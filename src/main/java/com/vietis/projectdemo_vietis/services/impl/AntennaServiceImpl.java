@@ -41,5 +41,10 @@ public class AntennaServiceImpl implements AntennaService {
         return antennaRepository.findById(id).get();
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        antennaRepository.deleteById(id);
+    }
+
 
 }

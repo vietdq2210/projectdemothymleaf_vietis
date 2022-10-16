@@ -40,4 +40,9 @@ public class ReaderWriterServiceImpl implements ReaderWriterService {
         }
         return readerWriters;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        readerWriterRepository.deleteById(id);
+    }
 }

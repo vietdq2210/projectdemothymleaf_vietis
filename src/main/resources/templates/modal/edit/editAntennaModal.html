@@ -15,7 +15,7 @@
                   <legend>WarehouseID</legend>
                   <select class="form-control form-select" th:field="*{warehouseId}"
                           name="warehouseId" >
-                    <option value="" th:text="*{antennaById.warehouseId}"></option>
+                    <option value=""></option>
                     <option th:each="warehouses : ${listWarehouse}"
                             th:value="${warehouses.id}"
                             th:text="${warehouses.name}"></option>

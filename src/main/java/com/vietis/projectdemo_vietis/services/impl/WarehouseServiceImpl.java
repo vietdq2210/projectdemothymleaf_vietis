@@ -23,5 +23,10 @@ public class WarehouseServiceImpl implements WarehouseService {
         return warehouseRepository.findAll();
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        warehouseRepository.deleteById(id);
+    }
+
 }
 

@@ -1,14 +1,14 @@
-<div class="modal fade" id="addGateModal" tabindex="-1" aria-labelledby="addGateModalLabel" aria-hidden="true"
-     th:fragment="addGateModal">
+<div class="modal fade" id="editGateModal" tabindex="-1" aria-labelledby="editGateModalLabel" aria-hidden="true"
+     th:fragment="editGateModal">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addGateModalLabel">Add Gate</h5>
+        <h5 class="modal-title" id="editGateModalLabel">Edit Gate</h5>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-12">
-            <form id="addNewGateForm" class="row" th:action="@{/gate/save}" method="post"
+            <form id="editNewGateForm" class="row" th:action="@{'/gate/update/' + ${gateWh.id}}" method="post"
                   enctype="multipart/form-data" th:object="${gateWh}">
               <div class="form-group col-md-12 mb-0">
                 <fieldset class="bg-dark-ui">
@@ -48,8 +48,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="javascript:void(0)" onclick="document.getElementById('addNewGateForm').submit();">
-          <button type="button" class="btn btn-success">Add</button>
+        <a href="javascript:void(0)" onclick="document.getElementById('editNewGateForm').submit();">
+          <button type="button" class="btn btn-success">Edit</button>
         </a>
         <a href="javascript:void(0)" data-bs-dismiss="modal">
           <button type="button" class="btn btn-danger">Close</button>

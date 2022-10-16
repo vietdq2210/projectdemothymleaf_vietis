@@ -36,34 +36,39 @@
                     </select>
                     <button type="submit" class="btn btn-success">Search</button>
                 </form>
-                <thead>
-                <tr>
-                    <th class="text-center">WarehouseID</th>
-                    <th class="text-center">Warehouse Name</th>
-                    <th class="text-center">Antenna ID</th>
-                    <th class="text-center">Port No</th>
-                    <th class="text-center">Shelf ID</th>
-                    <th class="text-center">Stage</th>
-                    <th class="text-center">CRUD</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="antenna : ${listAntenna}">
-                    <td class="text-center" th:text="*{antenna.warehouseId}" ></td>
-                    <td class="text-center" th:text="*{antenna.warehouseId}"></td>
-                    <td class="text-center" th:text="*{antenna.id}" name="antennaId"></td>
-                    <td class="text-center" th:text="*{antenna.portNo}"></td>
-                    <td class="text-center" th:text="*{antenna.shelfId}"></td>
-                    <td class="text-center" th:text="*{antenna.stageNumber}"></td>
-                    <td class="text-center">
-                        <a href="javascript:void(0)" data-bs-toggle="modal"  data-bs-target="#editAntennaModal" >
-                            <button type="button" class="btn btn-warning" th:href="@{'/antenna/update/' +${antenna.id}}"
-                                    th:onclick="'javascript:getAntennaById(' + *{foodItem.foodItemId} + ',' + *{foodItem.foodTagId} + ')'">Edit</button>
-                        </a>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                </tbody>
+                <form id="warehouseForm">
+                    <thead>
+                    <tr>
+                        <th class="text-center">WarehouseID</th>
+                        <th class="text-center">Warehouse Name</th>
+                        <th class="text-center">Antenna ID</th>
+                        <th class="text-center">Port No</th>
+                        <th class="text-center">Shelf ID</th>
+                        <th class="text-center">Stage</th>
+                        <th class="text-center">CRUD</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="antenna : ${listAntenna}">
+                        <td class="text-center" th:text="*{antenna.warehouseId}"></td>
+                        <td class="text-center" th:text="*{antenna.warehouseId}"></td>
+                        <td class="text-center" th:text="*{antenna.id}" name="antennaId"></td>
+                        <td class="text-center" th:text="*{antenna.portNo}"></td>
+                        <td class="text-center" th:text="*{antenna.shelfId}"></td>
+                        <td class="text-center" th:text="*{antenna.stageNumber}"></td>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editAntennaModal">
+                                <button type="button" class="btn btn-warning"
+                                        th:href="@{'/antenna/update/' +${antenna.id}}">Edit
+                                </button>
+                            </a>
+                            <a th:href="@{/antenna/delete(antennaId=${antenna.id})}"
+                            <button type="submit" class="btn btn-success">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </form>
             </table>
         </div>
     </div>
@@ -74,15 +79,12 @@
     </div>
 </div>
 <div th:replace="common/footer :: footer"></div>
-<th:block th:if="${check==1}">
-    <div th:replace="modal/add/addAntennaModal :: addAntennaModal(listWarehouse=${listWarehouse} , listReaderWriter=${listReaderWriter})"></div>
-</th:block>
-<th:block th:if="check=2">
-    <div th:replace="modal/edit/editAntennaModal :: editAntennaModal(listWarehouse=${listWarehouse},listReaderWriter=${listReaderWriter})"></div>
-</th:block>
+<div th:replace="modal/add/addAntennaModal :: addAntennaModal(listWarehouse=${listWarehouse} , listReaderWriter=${listReaderWriter})"></div>
+<div th:replace="modal/edit/editAntennaModal :: editAntennaModal(listWarehouse=${listWarehouse},listReaderWriter=${listReaderWriter})"></div>
 <script th:src="@{/js/all.js}"></script>
 <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/datatable/jquery.min.js}"></script>
 <script th:src="@{/js/datatable/datatables.vietnamese.js}"></script>
+<!--th:onclick="'javascript:getAntennaById(' + *{foodItem.foodItemId} + ',' + *{foodItem.foodTagId} + ')'"-->
 </body>
 </html>

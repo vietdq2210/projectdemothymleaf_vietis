@@ -52,8 +52,12 @@
                     <td class="text-center" th:text="*{readerWriter.address}"></td>
                     <td class="text-center" th:text="*{readerWriter.ipAddress}"></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="javascript:void(0)" data-bs-toggle="modal"  data-bs-target="#editReaderWriterModal" >
+                            <button type="button" class="btn btn-warning" th:href="@{'/readerWriter/update/' +${readerWriter.id}}">Edit</button>
+                        </a>
+                        <a th:href="@{/readerWriter/delete(readerWriterId=${readerWriter.id})}"
+                        <button type="submit" class="btn btn-success">Delete</button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -68,6 +72,7 @@
 </div>
 <div th:replace="common/footer :: footer"></div>
 <div th:replace="modal/add/addReaderWriterModal :: addReaderWriterModal(listWarehouse=${listWarehouse})"></div>
+<div th:replace="modal/edit/editReaderWriterModal :: editReaderWriterModal(listWarehouse=${listWarehouse})"></div>
 <script th:src="@{/js/all.js}"></script>
 <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/datatable/jquery.min.js}"></script>

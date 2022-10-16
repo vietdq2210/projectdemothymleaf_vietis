@@ -1,5 +1,6 @@
 package com.vietis.projectdemo_vietis.controllers;
 
+import com.vietis.projectdemo_vietis.models.entities.Gate;
 import com.vietis.projectdemo_vietis.models.entities.Shelf;
 import com.vietis.projectdemo_vietis.models.entities.Warehouse;
 import com.vietis.projectdemo_vietis.services.WarehouseService;
@@ -57,5 +58,32 @@ public class ShelfController {
         List<Shelf> shelfList = shelfService.getListShelf();
         model.addAttribute("listShelf",shelfList);
         return "shelfForm";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getEditShelfModal(Model model, @PathVariable Integer id){
+        Shelf shelf = new Shelf();
+        model.addAttribute("shelfWh", shelf);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Shelf> shelfList = shelfService.getListShelf();
+        model.addAttribute("listShelf",shelfList);
+        return "shelfForm";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateShelf(Model model, @ModelAttribute("shelfWh") Shelf shelf) {
+        shelfService.addShelf(shelf);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse", warehouseList);
+        List<Shelf> shelfList = shelfService.getListShelf();
+        model.addAttribute("listShelf",shelfList);
+        return "shelfForm";
+    }
+
+    @GetMapping("/delete")
+    public String deleteGate(Model model,@RequestParam(name = "shelfId",required=true) Integer id){
+        shelfService.deleteById(id);
+        return "redirect:" + "/shelf";
     }
 }

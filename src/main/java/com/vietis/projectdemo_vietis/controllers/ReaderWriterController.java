@@ -1,5 +1,7 @@
 package com.vietis.projectdemo_vietis.controllers;
 
+import com.vietis.projectdemo_vietis.models.entities.Antenna;
+import com.vietis.projectdemo_vietis.models.entities.Gate;
 import com.vietis.projectdemo_vietis.models.entities.ReaderWriter;
 import com.vietis.projectdemo_vietis.models.entities.Warehouse;
 import com.vietis.projectdemo_vietis.services.impl.ReaderWriterServiceImpl;
@@ -55,5 +57,32 @@ public class ReaderWriterController {
         List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
         model.addAttribute("listReaderWriter",readerWriterList);
         return "readerWriterForm";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getEditGateModal(Model model, @PathVariable Integer id){
+        ReaderWriter readerWriter = new ReaderWriter();
+        model.addAttribute("readerWriterWh",readerWriter);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse",warehouseList);
+        List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
+        model.addAttribute("listReaderWriter",readerWriterList);
+        return "readerWriterForm";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateAntenna(Model model, @ModelAttribute("readerWriterWh") ReaderWriter readerWriter) {
+        readerWriterService.saveReaderWriter(readerWriter);
+        List<Warehouse> warehouseList = warehouseService.getListWarehouse();
+        model.addAttribute("listWarehouse",warehouseList);
+        List<ReaderWriter> readerWriterList = readerWriterService.getListReaderWriter();
+        model.addAttribute("listReaderWriter",readerWriterList);
+        return "readerWriterForm";
+    }
+
+    @GetMapping("/delete")
+    public String deleteGate(Model model,@RequestParam(name = "readerWriterId",required=true) Integer id){
+        readerWriterService.deleteById(id);
+        return "redirect:" + "/readerWriter";
     }
 }
