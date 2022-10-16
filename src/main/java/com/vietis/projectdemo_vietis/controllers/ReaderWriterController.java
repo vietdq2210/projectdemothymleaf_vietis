@@ -60,7 +60,7 @@ public class ReaderWriterController {
     }
 
     @GetMapping("/update/{id}")
-    public String getEditGateModal(Model model, @PathVariable Integer id){
+    public String getEditReaderWriterModal(Model model, @PathVariable Integer id){
         ReaderWriter readerWriter = new ReaderWriter();
         model.addAttribute("readerWriterWh",readerWriter);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
@@ -71,7 +71,7 @@ public class ReaderWriterController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateAntenna(Model model, @ModelAttribute("readerWriterWh") ReaderWriter readerWriter) {
+    public String updateReaderWriter(Model model, @ModelAttribute("readerWriterWh") ReaderWriter readerWriter) {
         readerWriterService.saveReaderWriter(readerWriter);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse",warehouseList);
@@ -81,7 +81,7 @@ public class ReaderWriterController {
     }
 
     @GetMapping("/delete")
-    public String deleteGate(Model model,@RequestParam(name = "readerWriterId",required=true) Integer id){
+    public String deleteReaderWriter(Model model,@RequestParam(name = "readerWriterId",required=true) Integer id){
         readerWriterService.deleteById(id);
         return "redirect:" + "/readerWriter";
     }

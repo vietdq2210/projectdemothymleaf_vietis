@@ -57,7 +57,7 @@ public class WarehouseController {
     }
 
     @GetMapping("/delete")
-    public String deleteGate(Model model,@RequestParam(name = "warehouseId",required=true) Integer id){
+    public String deleteWarehouse(Model model,@RequestParam(name = "warehouseId",required=true) Integer id){
         warehouseService.deleteById(id);
         return "redirect:" + "/warehouse";
     }

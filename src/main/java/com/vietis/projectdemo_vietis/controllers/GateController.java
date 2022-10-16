@@ -72,7 +72,7 @@ public class GateController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateAntenna(Model model, @ModelAttribute("gateWh") Gate gate) {
+    public String updateGate(Model model, @ModelAttribute("gateWh") Gate gate) {
         gateService.addGate(gate);
         List<Warehouse> warehouseList = warehouseService.getListWarehouse();
         model.addAttribute("listWarehouse", warehouseList);

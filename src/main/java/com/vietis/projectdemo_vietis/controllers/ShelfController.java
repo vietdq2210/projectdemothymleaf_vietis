@@ -82,7 +82,7 @@ public class ShelfController {
     }
 
     @GetMapping("/delete")
-    public String deleteGate(Model model,@RequestParam(name = "shelfId",required=true) Integer id){
+    public String deleteShelf(Model model,@RequestParam(name = "shelfId",required=true) Integer id){
         shelfService.deleteById(id);
         return "redirect:" + "/shelf";
     }
