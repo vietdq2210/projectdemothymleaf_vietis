@@ -1,7 +1,5 @@
 package com.vietis.projectdemo_vietis.controllers;
 
-import com.vietis.projectdemo_vietis.models.entities.Antenna;
-import com.vietis.projectdemo_vietis.models.entities.Gate;
 import com.vietis.projectdemo_vietis.models.entities.ReaderWriter;
 import com.vietis.projectdemo_vietis.models.entities.Warehouse;
 import com.vietis.projectdemo_vietis.services.impl.ReaderWriterServiceImpl;

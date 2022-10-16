@@ -1,6 +1,5 @@
 package com.vietis.projectdemo_vietis.repositories;
 
-import com.vietis.projectdemo_vietis.models.entities.Gate;
 import com.vietis.projectdemo_vietis.models.entities.Shelf;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

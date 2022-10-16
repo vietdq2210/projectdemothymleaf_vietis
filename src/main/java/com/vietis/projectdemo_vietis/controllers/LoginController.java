@@ -1,7 +1,6 @@
 package com.vietis.projectdemo_vietis.controllers;
 
 import com.vietis.projectdemo_vietis.security.CustomUser;
-import com.vietis.projectdemo_vietis.utils.WebUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

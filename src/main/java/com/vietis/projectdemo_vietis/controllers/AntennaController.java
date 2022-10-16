@@ -1,14 +1,12 @@
 package com.vietis.projectdemo_vietis.controllers;
 
 import com.vietis.projectdemo_vietis.models.entities.Antenna;
-import com.vietis.projectdemo_vietis.models.entities.Gate;
 import com.vietis.projectdemo_vietis.models.entities.ReaderWriter;
 import com.vietis.projectdemo_vietis.models.entities.Warehouse;
 import com.vietis.projectdemo_vietis.services.impl.AntennaServiceImpl;
 import com.vietis.projectdemo_vietis.services.impl.ReaderWriterServiceImpl;
 import com.vietis.projectdemo_vietis.services.impl.WarehouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
